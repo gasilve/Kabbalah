@@ -22,6 +22,7 @@ export async function GET() {
             progress: progress || {
                 completedMeditations: [],
                 completedCurriculumItems: [],
+                favorites: [],
                 lastActive: new Date()
             }
         });

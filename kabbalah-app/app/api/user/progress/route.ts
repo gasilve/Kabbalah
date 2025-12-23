@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { markMeditationComplete, markCurriculumComplete } from '@/lib/profile-service';
+import { markMeditationComplete, markCurriculumComplete, toggleFavorite } from '@/lib/profile-service';
 
 export async function POST(request: Request) {
     try {
@@ -18,6 +18,8 @@ export async function POST(request: Request) {
             await markMeditationComplete(userId, id);
         } else if (type === 'curriculum') {
             await markCurriculumComplete(userId, id);
+        } else if (type === 'favorite') {
+            await toggleFavorite(userId, id);
         } else {
             return NextResponse.json({ error: 'Tipo de progreso inválido' }, { status: 400 });
         }

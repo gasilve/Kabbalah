@@ -17,6 +17,11 @@ export default function ForoPage() {
     const [isPostModalOpen, setIsPostModalOpen] = useState(false);
     const [newPost, setNewPost] = useState({ title: '', content: '', category: 'General' });
 
+    const filteredPosts = selectedCategory === "Todos"
+        ? posts
+        : posts.filter(p => p.category === selectedCategory);
+
+
     useEffect(() => {
         fetchPosts();
     }, []);
@@ -125,10 +130,10 @@ export default function ForoPage() {
 
                 {/* Feed */}
                 <div className="space-y-4">
-                    {posts.length === 0 && !loading && (
+                    {filteredPosts.length === 0 && !loading && (
                         <div className="text-center py-20 opacity-40 italic">No hay mensajes aún en esta categoría.</div>
                     )}
-                    {posts.map((thread, idx) => (
+                    {filteredPosts.map((thread, idx) => (
                         <motion.article
                             key={thread._id}
                             initial={{ opacity: 0, y: 20 }}
@@ -228,6 +233,19 @@ export default function ForoPage() {
                                     className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary/50 transition-colors"
                                     placeholder="Comparte tu sabiduría..."
                                 />
+                            </div>
+                            <div>
+                                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2">Categoría</label>
+                                <select
+                                    className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary/50 transition-colors appearance-none"
+                                    value={newPost.category}
+                                    onChange={e => setNewPost({ ...newPost, category: e.target.value })}
+                                >
+                                    {categories.slice(1).map(cat => (
+                                        <option key={cat} value={cat} className="bg-slate-900">{cat}</option>
+                                    ))}
+                                    <option value="General" className="bg-slate-900">General</option>
+                                </select>
                             </div>
                             <button className="w-full py-4 bg-primary text-slate-950 font-bold font-display tracking-widest rounded-xl shadow-glow-gold hover:scale-[1.02] transition-transform">
                                 PUBLICAR EN EL FORO

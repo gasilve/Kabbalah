@@ -1,6 +1,5 @@
 'use client';
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     Calendar,
@@ -17,6 +16,22 @@ import {
 import Link from 'next/link';
 
 export default function ConexionesPage() {
+    const [data, setData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/conexiones')
+            .then(res => res.json())
+            .then(val => {
+                setData(val);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Error fetching community data:', err);
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <div className="min-h-screen pb-32 pt-6">
             {/* Header */}
@@ -40,24 +55,26 @@ export default function ConexionesPage() {
 
                         <div className="relative z-10 space-y-3">
                             <div className="flex justify-between items-start">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/30 text-red-400 text-[10px] font-bold uppercase tracking-widest">
+                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-bold uppercase tracking-widest ${data?.nextEvent?.isLive ? 'bg-red-500/20 border-red-500/30 text-red-400' : 'bg-primary/20 border-primary/30 text-primary'}`}>
                                     <span className="relative flex h-2 w-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${data?.nextEvent?.isLive ? 'bg-red-400' : 'bg-primary'}`}></span>
+                                        <span className={`relative inline-flex rounded-full h-2 w-2 ${data?.nextEvent?.isLive ? 'bg-red-500' : 'bg-primary'}`}></span>
                                     </span>
-                                    En Vivo
+                                    {data?.nextEvent?.isLive ? 'En Vivo' : 'Próximo Evento'}
                                 </span>
                                 <Cast className="w-5 h-5 text-white/30" />
                             </div>
 
-                            <h3 className="text-white text-2xl font-display font-bold">Eventos y Clases</h3>
+                            <h3 className="text-white text-2xl font-display font-bold">
+                                {data?.nextEvent?.title || 'Eventos y Clases'}
+                            </h3>
                             <p className="text-slate-300 text-sm font-light leading-relaxed">
-                                Conecta con la energía de la semana en tiempo real. Sintoniza con la comunidad global.
+                                {data?.nextEvent ? `Sintoniza el ${new Date(data.nextEvent.date).toLocaleDateString()} para conectar con la comunidad global.` : 'Conecta con la energía de la semana en tiempo real.'}
                             </p>
 
                             <button className="w-full py-3.5 mt-2 bg-primary text-slate-950 font-bold font-display tracking-widest rounded-xl shadow-glow-gold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
                                 <Calendar className="w-4 h-4" />
-                                VER CALENDARIO
+                                {data?.nextEvent?.isLive ? 'SINTONIZAR AHORA' : 'VER CALENDARIO'}
                             </button>
                         </div>
                     </div>
@@ -119,12 +136,24 @@ export default function ConexionesPage() {
                     </div>
                 </section>
 
-                {/* Inspirational Quote */}
+                {/* Inspirational Quote / Stats */}
                 <div className="flex flex-col items-center justify-center text-center p-8 rounded-3xl border border-dashed border-white/10 bg-white/5 mt-4">
                     <Sparkles className="w-6 h-6 text-primary/40 mb-3" />
-                    <p className="text-slate-400 text-sm italic font-light leading-relaxed">
+                    <p className="text-slate-400 text-sm italic font-light leading-relaxed mb-4">
                         "La conexión es la clave de la luz."
                     </p>
+                    {data?.stats && (
+                        <div className="flex flex-col items-center gap-1">
+                            <div className="flex items-center gap-2">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                <span className="text-white font-bold text-lg">{data.stats.activeToday}</span>
+                            </div>
+                            <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Buscadores de luz activos hoy</span>
+                        </div>
+                    )}
                 </div>
             </main>
         </div>

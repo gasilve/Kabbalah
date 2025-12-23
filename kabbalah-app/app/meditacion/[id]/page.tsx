@@ -39,6 +39,19 @@ export default function MeditationPlayer() {
 
     const meditation = meditationsData.meditaciones.find(m => m.id === id) || meditationsData.meditaciones[0];
 
+    // Fetch initial status
+    useEffect(() => {
+        if (session) {
+            fetch('/api/user/dashboard')
+                .then(res => res.json())
+                .then(data => {
+                    const isFav = data.progress?.favorites?.includes(id);
+                    setIsFavorited(!!isFav);
+                })
+                .catch(err => console.error('Error fetching favorite status:', err));
+        }
+    }, [session, id]);
+
     // Simulate progress
     useEffect(() => {
         let interval: any;
@@ -177,7 +190,21 @@ export default function MeditationPlayer() {
                 {/* Secondary Actions */}
                 <div className="flex items-center justify-around w-full max-w-xs text-slate-500">
                     <button
-                        onClick={() => setIsFavorited(!isFavorited)}
+                        onClick={async () => {
+                            if (!session) return;
+                            const newStatus = !isFavorited;
+                            setIsFavorited(newStatus);
+                            try {
+                                await fetch('/api/user/progress', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ type: 'favorite', id })
+                                });
+                            } catch (error) {
+                                console.error('Error toggling favorite:', error);
+                                setIsFavorited(!newStatus); // Rollback
+                            }
+                        }}
                         className={`flex flex-col items-center gap-2 transition-colors ${isFavorited ? 'text-rose-500' : 'hover:text-white'}`}
                     >
                         <Heart className={`w-5 h-5 ${isFavorited ? 'fill-rose-500' : ''}`} />

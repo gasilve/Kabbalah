@@ -1,17 +1,17 @@
 'use client';
-
+import React, { useState, useEffect } from "react";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
 import { motion } from "framer-motion";
 import { Trophy, Star, Lock, ChevronUp } from "lucide-react";
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
-const SEFIROT_JOURNEY = [
+const SEFIROT_JOURNEY_BASE = [
     {
         id: 'malchut',
         name: 'Malchut',
         title: 'El Reino',
         level: 1,
-        status: 'completed',
         desc: 'Conexión con la realidad física.',
         color: '#8B4513', // Tierra
         glow: 'rgba(139, 69, 19, 0.5)'
@@ -21,7 +21,6 @@ const SEFIROT_JOURNEY = [
         name: 'Yesod',
         title: 'El Fundamento',
         level: 2,
-        status: 'completed',
         desc: 'Rompiendo el ego y conectando.',
         color: '#A855F7', // Púrpura
         glow: 'rgba(168, 85, 247, 0.5)'
@@ -31,7 +30,6 @@ const SEFIROT_JOURNEY = [
         name: 'Hod',
         title: 'La Gloria',
         level: 3,
-        status: 'active',
         desc: 'Humildad y agradecimiento.',
         color: '#F97316', // Naranja
         glow: 'rgba(249, 115, 22, 0.5)',
@@ -42,7 +40,6 @@ const SEFIROT_JOURNEY = [
         name: 'Netzach',
         title: 'La Eternidad',
         level: 4,
-        status: 'locked',
         desc: 'Perseverancia y victoria.',
         color: '#10B981', // Verde
         glow: 'rgba(16, 185, 129, 0.5)',
@@ -53,7 +50,6 @@ const SEFIROT_JOURNEY = [
         name: 'Tiferet',
         title: 'La Belleza',
         level: 5,
-        status: 'locked',
         desc: 'Equilibrio y compasión.',
         color: '#FBBF24', // Oro
         glow: 'rgba(251, 191, 36, 0.5)',
@@ -64,7 +60,6 @@ const SEFIROT_JOURNEY = [
         name: 'Gevurah',
         title: 'La Fuerza',
         level: 6,
-        status: 'locked',
         desc: 'Disciplina y límites.',
         color: '#DC2626', // Rojo
         glow: 'rgba(220, 38, 38, 0.5)'
@@ -74,7 +69,6 @@ const SEFIROT_JOURNEY = [
         name: 'Chesed',
         title: 'La Misericordia',
         level: 7,
-        status: 'locked',
         desc: 'Amor incondicional.',
         color: '#3B82F6', // Azul (using blue for Chesed here)
         glow: 'rgba(59, 130, 246, 0.5)',
@@ -83,6 +77,36 @@ const SEFIROT_JOURNEY = [
 ];
 
 export default function MyJourney() {
+    const { data: session } = useSession();
+    const [progress, setProgress] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (session) {
+            fetch('/api/user/dashboard')
+                .then(res => res.json())
+                .then(val => {
+                    setProgress(val.progress?.completedCurriculumItems || []);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error('Error fetching journey progress:', err);
+                    setLoading(false);
+                });
+        }
+    }, [session]);
+
+    const sefirotJourney = SEFIROT_JOURNEY_BASE.map(sf => {
+        const isCompleted = progress.includes(sf.id);
+        // Lógica simple para 'active': el primero no completado
+        const nextToComplete = SEFIROT_JOURNEY_BASE.find(s => !progress.includes(s.id))?.id;
+
+        return {
+            ...sf,
+            status: isCompleted ? 'completed' : (sf.id === nextToComplete ? 'active' : 'locked')
+        };
+    });
+
     return (
         <div className="min-h-screen pb-32 overflow-x-hidden relative">
             <AnimatedBackground />
@@ -116,7 +140,7 @@ export default function MyJourney() {
                 <div className="absolute left-[2.9rem] top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-accent-gold/60 to-transparent" />
 
                 <div className="space-y-12">
-                    {SEFIROT_JOURNEY.map((sefirah, index) => (
+                    {sefirotJourney.map((sefirah: any, index: number) => (
                         <motion.div
                             key={sefirah.id}
                             initial={{ opacity: 0, x: -20 }}
