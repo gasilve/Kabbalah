@@ -1,0 +1,74 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.venv/
+ENV/
+
+# Next.js
+.next/
+out/
+
+# Production
+build/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# Project Specific Large Data
+audios/
+transcripciones/
+contenido_procesado/
+contenido_procesado_OLD_v1/
+faltantes_zohar/
+stitch/
+logs/
+
+# Python cache & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Specific logs/temp files
+download_log.txt
+download_status.json
+audio_download_progress.json
+download_progress.json
+playlist_cache.json
+failed_files.txt
+missing_after_retry.txt
+processed_list.txt
+mp3_list.txt
+valid_txt_transcripts.txt
+temp_processor_output.txt
+processing_state.json
+
+# Local IDE folders
+.vscode/
+.idea/

@@ -1,0 +1,312 @@
+{
+    "meditaciones": [
+        {
+            "id": "med-001",
+            "titulo": "Meditación de Reconstrucción del ADN Espiritual",
+            "video_id": "BVt4zpaq-s8",
+            "video_title": "Kabbalah: Secretos del Zohar - clase 15 Meditación",
+            "duracion_minutos": 23.7,
+            "timestamp_inicio": 0,
+            "timestamp_fin": 1420,
+            "tipo": "meditacion_guiada",
+            "intenciones": [
+                "transformacion",
+                "salud",
+                "proteccion",
+                "conexion"
+            ],
+            "descripcion": "Meditación profunda para reconstruir las 12 hélices del ADN espiritual, conectar con ángeles protectores y transformarse en un ser de luz.",
+            "instrucciones_completas": "1. Poner los pies en paralelo en el suelo\n2. Manos con palma hacia arriba\n3. Respirar tres veces profundamente\n4. Visualizar estrella de David\n5. Visualizar primera Merkabah: Guimel-Bet-Vav (גבו)\n6. Visualizar segunda Merkabah Eliona: Kuf-Resh-Ayin (קרעו)\n7. Crear hilo de luz dorada entre corazones del grupo\n8. Visualizar cuatro Vavs (וווו) como corona sobre la cabeza\n9. Conectar con Metatron y Sandalfón\n10. Visualizar el nombre de 12 letras: Yud-Alef-Lamed-Dalet-Guimel-Vav-Nun-Yud-Guimel-Yud-Guimel\n11. La luz se inserta en el circuito sanguíneo\n12. Reconstrucción de las 12 hélices del ADN\n13. Transformación en ser superior de luz\n14. Proyectar luz a toda la tierra\n15. Visualizarse en el Gan Eden\n16. El ángel Samael tiembla ante Kras Satan escrito en la frente\n17. Conversación libre con Metatron y Sandalfón",
+            "nombres_divinos": [
+                {
+                    "nombre": "Metatron",
+                    "hebreo": "מטטרון",
+                    "tipo": "angel",
+                    "rol": "Jefe de los ángeles, protector y ayudante espiritual",
+                    "timestamp": 243
+                },
+                {
+                    "nombre": "Sandalfón",
+                    "hebreo": "סנדלפון",
+                    "tipo": "angel",
+                    "rol": "Protector y ayudante espiritual",
+                    "timestamp": 249
+                },
+                {
+                    "nombre": "Samael",
+                    "hebreo": "סמאל",
+                    "tipo": "angel",
+                    "rol": "Ángel del lado oscuro que tiembla ante la luz",
+                    "timestamp": 483
+                }
+            ],
+            "letras_hebreas": [
+                {
+                    "secuencia": "גבו",
+                    "nombres": [
+                        "Guimel",
+                        "Bet",
+                        "Vav"
+                    ],
+                    "transliteracion": "Guimel-Bet-Vav",
+                    "proposito": "Merkabah Tajona - Primera carroza divina",
+                    "visualizacion": "Iluminar cada letra en blanco dentro de estrella de David",
+                    "timestamp": 60
+                },
+                {
+                    "secuencia": "קרעו",
+                    "nombres": [
+                        "Kuf",
+                        "Resh",
+                        "Ayin"
+                    ],
+                    "transliteracion": "Kuf-Resh-Ayin",
+                    "proposito": "Merkabah Eliona - Segunda carroza divina superior",
+                    "timestamp": 99
+                },
+                {
+                    "secuencia": "וווו",
+                    "nombres": [
+                        "Vav",
+                        "Vav",
+                        "Vav",
+                        "Vav"
+                    ],
+                    "transliteracion": "Vav-Vav-Vav-Vav",
+                    "proposito": "Corona sobre la cabeza, conexión con Adam",
+                    "timestamp": 157
+                },
+                {
+                    "secuencia": "יאלדגונייג",
+                    "nombres": [
+                        "Yud",
+                        "Alef",
+                        "Lamed",
+                        "Dalet",
+                        "Guimel",
+                        "Vav",
+                        "Nun",
+                        "Yud",
+                        "Guimel",
+                        "Yud",
+                        "Guimel"
+                    ],
+                    "transliteracion": "Nombre de 12 letras",
+                    "proposito": "Reconstrucción del ADN de 12 hélices",
+                    "timestamp": 273
+                }
+            ],
+            "conceptos": [
+                {
+                    "termino": "Merkabah",
+                    "hebreo": "מרכבה",
+                    "definicion": "Carroza divina, vehículo espiritual de luz",
+                    "tipos": [
+                        "Merkabah Tajona",
+                        "Merkabah Eliona"
+                    ]
+                },
+                {
+                    "termino": "ADN de 12 hélices",
+                    "definicion": "El ADN espiritual completo del ser humano como fue creado originalmente, que permite ser un Adam (ser superior)",
+                    "relacion": "La mayoría de humanos solo tienen activadas 2 hélices, la meditación reconstruye las 12"
+                },
+                {
+                    "termino": "Gan Eden",
+                    "hebreo": "גן עדן",
+                    "definicion": "Jardín del Edén, mundo de otra dimensión espiritual",
+                    "uso_meditacion": "Proyectarse mentalmente para confrontar a Samael"
+                },
+                {
+                    "termino": "Kras Satan",
+                    "hebreo": "כרס שטן",
+                    "definicion": "Nombre que desintegra al adversario, escrito en la frente",
+                    "poder": "Hace temblar al ángel Samael"
+                }
+            ],
+            "experiencias_compartidas": [
+                {
+                    "experiencia": "Voz de Dios diciendo 'me habéis hecho ganar La Apuesta'",
+                    "contexto": "Los ángeles dijeron que el hombre decepcionaría, Dios apostó que no",
+                    "timestamp": 651
+                },
+                {
+                    "experiencia": "La cuerda de luz se volvía más gruesa y fuerte",
+                    "timestamp": 684
+                },
+                {
+                    "experiencia": "Satán apareció como cosa marrón que se disolvió",
+                    "timestamp": 720
+                },
+                {
+                    "experiencia": "Sandalf ón y Metatron dijeron: solo con amor y meditación podéis acabar con el mal",
+                    "timestamp": 1238
+                }
+            ],
+            "color_ui": "#A855F7",
+            "icono": "🧘"
+        }
+    ],
+    "nombres_divinos_catalogo": [
+        {
+            "id": "nombre-001",
+            "nombre": "Metatron",
+            "hebreo": "מטטרון",
+            "tipo": "angel",
+            "descripcion": "Jefe supremo de todos los ángeles, enseñó los secretos de la Torah a Rabí Shimón Bar Yojai en la cueva",
+            "cuando_usar": [
+                "proteccion",
+                "guia_espiritual",
+                "enseñanza",
+                "transformacion"
+            ],
+            "fuente": [
+                "Clase 1 - Preliminares",
+                "Clase 15 - Meditación"
+            ],
+            "color": "#FFD700"
+        },
+        {
+            "id": "nombre-002",
+            "nombre": "Sandalfón",
+            "hebreo": "סנדלפון",
+            "tipo": "angel",
+            "descripcion": "Ángel protector que trabaja junto a Metatron",
+            "cuando_usar": [
+                "proteccion",
+                "guia_espiritual",
+                "meditacion"
+            ],
+            "fuente": [
+                "Clase 15 - Meditación"
+            ],
+            "color": "#FFD700"
+        }
+    ],
+    "conceptos_diccionario": [
+        {
+            "id": "concepto-001",
+            "termino": "Rosa",
+            "hebreo": "שושנה",
+            "definicion": "Representa al Pueblo de Israel en el Zohar",
+            "explicacion": "La rosa tiene 13 pétalos que simbolizan los 13 atributos de misericordia. Así como la rosa tiene espinas, Israel está rodeado de naciones pero mantiene su belleza espiritual.",
+            "referencias": [
+                "Clase 1 - Preliminares"
+            ],
+            "relacionado_con": [
+                "13 atributos",
+                "Berit",
+                "Alianza"
+            ]
+        },
+        {
+            "id": "concepto-002",
+            "termino": "Mi",
+            "hebreo": "מי",
+            "definicion": "Secretos del cielo",
+            "explicacion": "Mi (Mem-Yud) designa los secretos del cielo, el mundo espiritual invisible",
+            "relacionado_con": [
+                "Ele",
+                "Elohim"
+            ]
+        },
+        {
+            "id": "concepto-003",
+            "termino": "Ele",
+            "hebreo": "אלה",
+            "definicion": "Las cosas visibles de la tierra",
+            "explicacion": "Ele (Alef-Lamed-He) designa el mundo físico, las cosas que podemos ver",
+            "relacionado_con": [
+                "Mi",
+                "Elohim"
+            ]
+        },
+        {
+            "id": "concepto-004",
+            "termino": "Elohim",
+            "hebreo": "אלהים",
+            "definicion": "Nombre divino que une cielo y tierra",
+            "explicacion": "Elohim se forma de Mi (secretos) + Ele (visible) = la unión del mundo espiritual y físico, el alma y el cuerpo. No es plural sino un concepto de totalidad.",
+            "relacionado_con": [
+                "Mi",
+                "Ele",
+                "Bereshit"
+            ]
+        },
+        {
+            "id": "concepto-005",
+            "termino": "Bereshit",
+            "hebreo": "בראשית",
+            "definicion": "En el principio",
+            "explicacion": "Primera palabra de la Torah. Contiene el secreto de la creación.",
+            "relacionado_con": [
+                "Elohim",
+                "Bara"
+            ]
+        }
+    ],
+    "intenciones": [
+        {
+            "id": "int-001",
+            "nombre": "Transformación Espiritual",
+            "slug": "transformacion",
+            "descripcion": "Evolución del ser, reconstrucción espiritual, convertirse en ser de luz",
+            "icono": "✨",
+            "color": "#A855F7",
+            "contenido_relacionado": [
+                "med-001"
+            ]
+        },
+        {
+            "id": "int-002",
+            "nombre": "Salud y Sanación",
+            "slug": "salud",
+            "descripcion": "Sanación física y espiritual, reconstrucción del ADN",
+            "icono": "💚",
+            "color": "#10B981",
+            "contenido_relacionado": [
+                "med-001"
+            ]
+        },
+        {
+            "id": "int-003",
+            "nombre": "Protección",
+            "slug": "proteccion",
+            "descripcion": "Protección espiritual, desintegración del mal, escudo divino",
+            "icono": "🛡️",
+            "color": "#DC2626",
+            "contenido_relacionado": [
+                "med-001"
+            ]
+        },
+        {
+            "id": "int-004",
+            "nombre": "Conexión Divina",
+            "slug": "conexion",
+            "descripcion": "Conexión con ángeles, comunicación con lo divino",
+            "icono": "🕊️",
+            "color": "#3B82F6",
+            "contenido_relacionado": [
+                "med-001"
+            ]
+        },
+        {
+            "id": "int-005",
+            "nombre": "Sabiduría",
+            "slug": "sabiduria",
+            "descripcion": "Conocimiento de los secretos del Zohar, comprensión profunda",
+            "icono": "📖",
+            "color": "#6366F1",
+            "contenido_relacionado": []
+        },
+        {
+            "id": "int-006",
+            "nombre": "Prosperidad",
+            "slug": "prosperidad",
+            "descripcion": "Abundancia espiritual y material",
+            "icono": "💰",
+            "color": "#FBBF24",
+            "contenido_relacionado": []
+        }
+    ]
+}

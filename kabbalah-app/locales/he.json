@@ -1,0 +1,67 @@
+{
+    "nav": {
+        "home": "בית",
+        "explore": "גלה",
+        "meditations": "מדיטציות",
+        "connections": "חיבורים",
+        "profile": "פרופיל"
+    },
+    "home": {
+        "greeting": "שלום",
+        "subtitle": "מה הכוונה שלך היום?",
+        "swipeHint": "החלק לחקור"
+    },
+    "spheres": {
+        "love": "אהבה",
+        "health": "בריאות",
+        "prosperity": "שפע",
+        "wisdom": "חכמה",
+        "protection": "הגנה"
+    },
+    "courses": {
+        "treeOfLife": "עץ החיים",
+        "72names": "72 שמות הקודש",
+        "zohar": "סודות הזוהר",
+        "alefBet": "אלף-בית הקודש"
+    },
+    "meditation": {
+        "title": "מדיטציות",
+        "featured": "מומלץ",
+        "all": "הכל",
+        "duration": "דקות",
+        "level": "רמה",
+        "beginner": "מתחיל",
+        "intermediate": "בינוני",
+        "advanced": "מתקדם",
+        "play": "הפעל"
+    },
+    "player": {
+        "meditating": "מתרגל...",
+        "ready": "מוכן",
+        "reset": "איפוס"
+    },
+    "profile": {
+        "history": "היסטוריית הלמידה שלי",
+        "achievements": "הישגים ומדליות",
+        "notifications": "התראות",
+        "settings": "הגדרות",
+        "logout": "התנתק"
+    },
+    "connections": {
+        "title": "חיבורים",
+        "groups": "קבוצות לימוד",
+        "forum": "פורום רוחני",
+        "circles": "מעגלי תפילה",
+        "events": "אירועים מיוחדים"
+    },
+    "common": {
+        "loading": "טוען...",
+        "error": "שגיאה",
+        "back": "חזרה",
+        "next": "הבא",
+        "save": "שמור",
+        "cancel": "ביטול",
+        "join": "הצטרף",
+        "subscribe": "הרשמה"
+    }
+}

@@ -1,0 +1,126 @@
+{
+  "letter_alef": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\alef.mp3"
+  },
+  "letter_bet": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\bet.mp3"
+  },
+  "letter_gimel": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\gimel.mp3"
+  },
+  "letter_dalet": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\dalet.mp3"
+  },
+  "letter_he": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\he.mp3"
+  },
+  "letter_vav": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\vav.mp3"
+  },
+  "letter_zayin": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\zayin.mp3"
+  },
+  "letter_chet": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\chet.mp3"
+  },
+  "letter_tet": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\tet.mp3"
+  },
+  "letter_yod": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\yod.mp3"
+  },
+  "letter_kaf": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\kaf.mp3"
+  },
+  "letter_lamed": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\lamed.mp3"
+  },
+  "letter_mem": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\mem.mp3"
+  },
+  "letter_nun": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\nun.mp3"
+  },
+  "letter_samech": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\samech.mp3"
+  },
+  "letter_ayin": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\ayin.mp3"
+  },
+  "letter_pe": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\pe.mp3"
+  },
+  "letter_tsadi": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\tsadi.mp3"
+  },
+  "letter_qof": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\qof.mp3"
+  },
+  "letter_resh": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\resh.mp3"
+  },
+  "letter_shin": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\shin.mp3"
+  },
+  "letter_tav": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\letters\\tav.mp3"
+  },
+  "72name_1": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\72names\\1-vhv.mp3"
+  },
+  "72name_2": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\72names\\2-yly.mp3"
+  },
+  "72name_3": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\72names\\3-syt.mp3"
+  },
+  "72name_4": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\72names\\4-elm.mp3"
+  },
+  "72name_5": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\72names\\5-mhs.mp3"
+  },
+  "prayer_shema": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\prayers\\shema.mp3"
+  },
+  "prayer_baruch": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\prayers\\baruch.mp3"
+  },
+  "prayer_amen": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\prayers\\amen.mp3"
+  },
+  "prayer_shalom": {
+    "source": "gtts",
+    "path": "..\\kabbalah-app\\public\\audio\\hebrew\\prayers\\shalom.mp3"
+  }
+}

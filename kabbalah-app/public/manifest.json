@@ -1,0 +1,28 @@
+{
+    "name": "Kabbalah Mashiah",
+    "short_name": "Kabbalah",
+    "description": "Tu guía de sabiduría y transformación espiritual",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050511",
+    "theme_color": "#050511",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [],
+    "categories": [
+        "education",
+        "lifestyle",
+        "spirituality"
+    ]
+}

@@ -1,0 +1,67 @@
+{
+    "nav": {
+        "home": "Home",
+        "explore": "Explore",
+        "meditations": "Meditations",
+        "connections": "Connections",
+        "profile": "Profile"
+    },
+    "home": {
+        "greeting": "Shalom",
+        "subtitle": "What is your intention today?",
+        "swipeHint": "Swipe to explore"
+    },
+    "spheres": {
+        "love": "Love",
+        "health": "Health",
+        "prosperity": "Prosperity",
+        "wisdom": "Wisdom",
+        "protection": "Protection"
+    },
+    "courses": {
+        "treeOfLife": "Tree of Life",
+        "72names": "72 Names of God",
+        "zohar": "Secrets of the Zohar",
+        "alefBet": "Sacred Alef-Bet"
+    },
+    "meditation": {
+        "title": "Meditations",
+        "featured": "Featured",
+        "all": "All",
+        "duration": "min",
+        "level": "Level",
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "play": "Play"
+    },
+    "player": {
+        "meditating": "Meditating...",
+        "ready": "Ready",
+        "reset": "Reset"
+    },
+    "profile": {
+        "history": "My Study History",
+        "achievements": "Achievements & Badges",
+        "notifications": "Notifications",
+        "settings": "Settings",
+        "logout": "Log Out"
+    },
+    "connections": {
+        "title": "Connections",
+        "groups": "Study Groups",
+        "forum": "Spiritual Forum",
+        "circles": "Prayer Circles",
+        "events": "Special Events"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "back": "Back",
+        "next": "Next",
+        "save": "Save",
+        "cancel": "Cancel",
+        "join": "Join",
+        "subscribe": "Subscribe"
+    }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "nombres_72",
+    "titulo": "nombres 72",
+    "video_count": 1,
+    "descripcion": "Serie de clases sobre nombres 72.",
+    "image": "https://images.unsplash.com/photo-1518005020250-67592b2261b2?w=500&q=80"
+  },
+  {
+    "id": "secretos_zohar",
+    "titulo": "secretos zohar",
+    "video_count": 167,
+    "descripcion": "Serie de clases sobre secretos zohar.",
+    "image": "https://images.unsplash.com/photo-1518005020250-67592b2261b2?w=500&q=80"
+  },
+  {
+    "id": "sefer_yetzirah",
+    "titulo": "sefer yetzirah",
+    "video_count": 8,
+    "descripcion": "Serie de clases sobre sefer yetzirah.",
+    "image": "https://images.unsplash.com/photo-1518005020250-67592b2261b2?w=500&q=80"
+  },
+  {
+    "id": "tefila",
+    "titulo": "tefila",
+    "video_count": 1,
+    "descripcion": "Serie de clases sobre tefila.",
+    "image": "https://images.unsplash.com/photo-1518005020250-67592b2261b2?w=500&q=80"
+  }
+]

@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+.glass-panel {
+  @apply backdrop-blur-xl border border-white/10;
+  background-color: rgba(16, 24, 45, 0.7);
+}
+
+@layer base {
+  :root {
+    --background: #050914;
+    --foreground: #F8FAFC;
+    --primary: #FBBF24;
+    --primary-dark: #B45309;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased min-h-screen overscroll-none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .drop-shadow-gold {
+    filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.4));
+  }
+}
+
+@layer components {
+  .card-premium {
+    @apply backdrop-blur-xl border border-white/10 rounded-2xl shadow-glow-card transition-all duration-300;
+    background-color: rgba(16, 24, 45, 0.7);
+  }
+
+  .btn-gold {
+    @apply bg-gradient-to-r from-primary to-[#F59E0B] text-black font-bold py-3 px-6 rounded-xl shadow-glow-gold active:scale-95 transition-all uppercase tracking-wide;
+  }
+}

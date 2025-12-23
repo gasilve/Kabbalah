@@ -1,0 +1,67 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "explore": "Explorar",
+        "meditations": "Meditaciones",
+        "connections": "Conexiones",
+        "profile": "Perfil"
+    },
+    "home": {
+        "greeting": "Shalom",
+        "subtitle": "¿Cuál es tu intención hoy?",
+        "swipeHint": "Desliza para explorar"
+    },
+    "spheres": {
+        "love": "Amor",
+        "health": "Salud",
+        "prosperity": "Prosperidad",
+        "wisdom": "Sabiduría",
+        "protection": "Protección"
+    },
+    "courses": {
+        "treeOfLife": "Árbol de la Vida",
+        "72names": "72 Nombres de Dios",
+        "zohar": "Secretos del Zohar",
+        "alefBet": "Alef-Bet Sagrado"
+    },
+    "meditation": {
+        "title": "Meditaciones",
+        "featured": "Destacada",
+        "all": "Todas",
+        "duration": "min",
+        "level": "Nivel",
+        "beginner": "Principiante",
+        "intermediate": "Intermedio",
+        "advanced": "Avanzado",
+        "play": "Reproducir"
+    },
+    "player": {
+        "meditating": "Meditando...",
+        "ready": "Preparado",
+        "reset": "Reiniciar"
+    },
+    "profile": {
+        "history": "Mi Historial de Estudio",
+        "achievements": "Logros y Medallas",
+        "notifications": "Notificaciones",
+        "settings": "Configuración",
+        "logout": "Cerrar Sesión"
+    },
+    "connections": {
+        "title": "Conexiones",
+        "groups": "Grupos de Estudio",
+        "forum": "Foro Espiritual",
+        "circles": "Círculos de Oración",
+        "events": "Eventos Especiales"
+    },
+    "common": {
+        "loading": "Cargando...",
+        "error": "Error",
+        "back": "Volver",
+        "next": "Siguiente",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "join": "Unirse",
+        "subscribe": "Inscribirse"
+    }
+}
