@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import Link from "next/link";
 import { intenciones, meditacion } from "../../data/content";
 
