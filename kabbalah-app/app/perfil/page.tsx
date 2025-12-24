@@ -14,6 +14,7 @@ import {
     Globe,
     Crown,
     LogOut,
+    LogIn,
     Sparkles,
     Check,
     Heart
@@ -47,16 +48,16 @@ export default function ProfilePage() {
     }, [session]);
 
     const userData = {
-        name: session?.user?.name || "Daniela S.",
-        role: data?.profile?.role || "Buscadora de Luz",
-        bio: data?.profile?.bio || '"La chispa divina reside en la contemplación del silencio."',
-        level: data?.profile?.level || 1,
+        name: session?.user?.name || "Buscador Invitado",
+        role: data?.profile?.role || (session ? "Iniciado" : "Visitante"),
+        bio: data?.profile?.bio || (session ? "Tu camino espiritual ha comenzado." : "Inicia sesión para guardar tu progreso en el Árbol de la Vida."),
+        level: data?.profile?.level || (session ? 1 : 0),
         meditationMin: data?.profile?.stats?.meditationMinutes || 0,
         meditationTrend: "+0%",
         coursesDone: data?.progress?.completedCurriculumItems?.length || 0,
         coursesTotal: 12,
-        currentCourse: data?.profile?.currentCourse || "Introducción",
-        avatar: session?.user?.image || "https://lh3.googleusercontent.com/aida-public/AB6AXuCV5JtW0bUwiKHzIKEJCGffCoS0vwyWZ85lUPpEulQohY4FFLfEaiLQGuwucuZC4Do9rdk4_j9DCpCseXNacbAjA2ZW8SBQwXC5FBCxoYmla2AVB4_bjvMcgdANxAfwCLk2-m5h7qDSix1QDyKV6XPTN7OIMyx8SSfqlPNfMIrAKruZhrKmR1784Bcyty6hl1k4YwWSs1yWw5A8Bd4vcqJLF1kuChfHJzfnao9rFwlQetYWlfBlY2jyu2YJcoHugRVH2YtHDpRHl4iF"
+        currentCourse: data?.profile?.currentCourse || (session ? "Introducción" : "Nivel Semilla"),
+        avatar: session?.user?.image || "https://api.dicebear.com/7.x/bottts/svg?seed=Kabbalah"
     };
 
     const isSefiraCompleted = (id: string) => {
@@ -69,7 +70,10 @@ export default function ProfilePage() {
             <div className="flex items-center justify-between px-6 mb-8">
                 <div className="w-10" /> {/* Spacer */}
                 <h1 className="text-xl font-display text-white tracking-widest text-center">Perfil</h1>
-                <button className="text-primary text-sm font-bold tracking-wider hover:opacity-80 transition-opacity">
+                <button
+                    onClick={() => alert("Función de edición próximamente disponible")}
+                    className="text-primary text-sm font-bold tracking-wider hover:opacity-80 transition-opacity"
+                >
                     EDITAR
                 </button>
             </div>
@@ -224,21 +228,36 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                     <h3 className="text-lg font-display text-white px-1">Ajustes</h3>
                     <div className="glass-panel border-white/5 rounded-2xl overflow-hidden divide-y divide-white/5">
-                        <MenuButton icon={<User className="text-blue-400" />} label="Cuenta" />
-                        <MenuButton icon={<Bell className="text-primary" />} label="Notificaciones" badge />
-                        <MenuButton icon={<Globe className="text-emerald-400" />} label="Idioma" value="Español" />
-                        <MenuButton icon={<Crown className="text-amber-400" />} label="Suscripción" tag="PRO" />
-                        <button
-                            onClick={() => signOut()}
-                            className="w-full flex items-center justify-between p-4 hover:bg-rose-500/5 transition-colors group"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="p-2 rounded-full bg-slate-900 group-hover:bg-rose-500/20 transition-colors">
-                                    <LogOut className="w-4 h-4 text-slate-500 group-hover:text-rose-500" />
+                        <MenuButton icon={<User className="text-blue-400" />} label="Cuenta" onClick={() => alert("Configuración de cuenta próximamente")} />
+                        <MenuButton icon={<Bell className="text-primary" />} label="Notificaciones" badge onClick={() => alert("Gestión de notificaciones próximamente")} />
+                        <MenuButton icon={<Globe className="text-emerald-400" />} label="Idioma" value="Español" onClick={() => alert("Traducciones en progreso")} />
+                        <MenuButton icon={<Crown className="text-amber-400" />} label="Suscripción" tag="PRO" onClick={() => alert("Membresía PRO próximamente")} />
+                        {session ? (
+                            <button
+                                onClick={() => signOut({ callbackUrl: '/login' })}
+                                className="w-full flex items-center justify-between p-4 hover:bg-rose-500/5 transition-colors group"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 rounded-full bg-slate-900 group-hover:bg-rose-500/20 transition-colors">
+                                        <LogOut className="w-4 h-4 text-slate-500 group-hover:text-rose-500" />
+                                    </div>
+                                    <span className="text-sm font-medium text-slate-400 group-hover:text-rose-500">Cerrar Sesión</span>
                                 </div>
-                                <span className="text-sm font-medium text-slate-400 group-hover:text-rose-500">Cerrar Sesión</span>
-                            </div>
-                        </button>
+                            </button>
+                        ) : (
+                            <Link href="/login" className="block">
+                                <button
+                                    className="w-full flex items-center justify-between p-4 hover:bg-primary/5 transition-colors group"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2 rounded-full bg-slate-900 group-hover:bg-primary/20 transition-colors">
+                                            <LogIn className="w-4 h-4 text-slate-500 group-hover:text-primary" />
+                                        </div>
+                                        <span className="text-sm font-medium text-slate-400 group-hover:text-primary">Iniciar Sesión</span>
+                                    </div>
+                                </button>
+                            </Link>
+                        )}
                     </div>
                 </div>
             </main>
@@ -276,9 +295,12 @@ function SefiraBadge({ completed, name, icon, large = false, glow = false }: { c
     );
 }
 
-function MenuButton({ icon, label, value, tag, badge }: { icon: React.ReactNode; label: string; value?: string; tag?: string; badge?: boolean }) {
+function MenuButton({ icon, label, value, tag, badge, onClick }: { icon: React.ReactNode; label: string; value?: string; tag?: string; badge?: boolean; onClick?: () => void }) {
     return (
-        <button className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+        <button
+            onClick={onClick}
+            className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors group"
+        >
             <div className="flex items-center gap-3">
                 <div className="p-2 rounded-full bg-slate-900">
                     {React.cloneElement(icon as React.ReactElement<any>, { className: "w-4 h-4" })}

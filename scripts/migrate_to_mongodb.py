@@ -14,7 +14,7 @@ MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
 DATABASE_NAME = 'kabbalah_app'
 
 # Directorio de contenido procesado
-CONTENT_DIR = Path(__file__).parent.parent / 'scripts' / 'contenido_procesado'
+CONTENT_DIR = Path(__file__).parent.parent / 'contenido_procesado'
 
 def connect_to_mongodb():
     """Conecta a MongoDB"""

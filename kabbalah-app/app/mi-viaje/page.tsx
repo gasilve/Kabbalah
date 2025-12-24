@@ -231,7 +231,10 @@ export default function MyJourney() {
                                                     className="h-full bg-gradient-to-r from-accent-gold to-orange-500 shadow-[0_0_10px_rgba(255,215,0,0.5)]"
                                                 />
                                             </div>
-                                            <button className="w-full mt-3 py-2 rounded-lg bg-accent-gold text-black text-xs font-bold hover:bg-yellow-400 transition-colors shadow-lg shadow-accent-gold/20 flex items-center justify-center gap-1">
+                                            <button
+                                                onClick={() => alert("Próximamente: Continuar con la siguiente lección de " + sefirah.name)}
+                                                className="w-full mt-3 py-2 rounded-lg bg-accent-gold text-black text-xs font-bold hover:bg-yellow-400 transition-colors shadow-lg shadow-accent-gold/20 flex items-center justify-center gap-1"
+                                            >
                                                 Continuar <ChevronUp className="w-3 h-3 rotate-90" />
                                             </button>
                                         </div>

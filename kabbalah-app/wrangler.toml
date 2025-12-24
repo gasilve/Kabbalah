@@ -1,4 +1,4 @@
-name = "kabbalah-app"
+name = "kabbalah"
 main = ".open-next/worker.js"
 compatibility_flags = ["nodejs_compat"]
 compatibility_date = "2024-12-01"

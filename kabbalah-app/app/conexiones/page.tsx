@@ -72,7 +72,10 @@ export default function ConexionesPage() {
                                 {data?.nextEvent ? `Sintoniza el ${new Date(data.nextEvent.date).toLocaleDateString()} para conectar con la comunidad global.` : 'Conecta con la energía de la semana en tiempo real.'}
                             </p>
 
-                            <button className="w-full py-3.5 mt-2 bg-primary text-slate-950 font-bold font-display tracking-widest rounded-xl shadow-glow-gold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+                            <button
+                                onClick={() => alert("Calendario de eventos próximamente")}
+                                className="w-full py-3.5 mt-2 bg-primary text-slate-950 font-bold font-display tracking-widest rounded-xl shadow-glow-gold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2"
+                            >
                                 <Calendar className="w-4 h-4" />
                                 {data?.nextEvent?.isLive ? 'SINTONIZAR AHORA' : 'VER CALENDARIO'}
                             </button>
@@ -81,22 +84,24 @@ export default function ConexionesPage() {
                 </section>
 
                 {/* Ask the Rabbi Section */}
-                <section>
-                    <div className="glass-panel border-white/5 rounded-2xl p-5 hover:border-primary/20 transition-all cursor-pointer group flex items-center gap-4">
-                        <div className="flex-1 space-y-1">
-                            <div className="flex items-center gap-2 text-primary">
-                                <Sparkles className="w-4 h-4" />
-                                <h4 className="text-base font-display text-white group-hover:text-primary transition-colors">Pregunta al Rabino</h4>
+                <Link href="/preguntas" className="block">
+                    <section>
+                        <div className="glass-panel border-white/5 rounded-2xl p-5 hover:border-primary/20 transition-all cursor-pointer group flex items-center gap-4">
+                            <div className="flex-1 space-y-1">
+                                <div className="flex items-center gap-2 text-primary">
+                                    <Sparkles className="w-4 h-4" />
+                                    <h4 className="text-base font-display text-white group-hover:text-primary transition-colors">Pregunta al Rabino</h4>
+                                </div>
+                                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                                    Envía tus dudas espirituales y recibe guía personalizada.
+                                </p>
                             </div>
-                            <p className="text-xs text-slate-400 font-light leading-relaxed">
-                                Envía tus dudas espirituales y recibe guía personalizada.
-                            </p>
+                            <div className="w-20 h-20 rounded-xl overflow-hidden border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1544648151-1823ed41167b?q=80&w=1974&auto=format&fit=crop')] bg-center bg-cover" />
+                            </div>
                         </div>
-                        <div className="w-20 h-20 rounded-xl overflow-hidden border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
-                            <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1544648151-1823ed41167b?q=80&w=1974&auto=format&fit=crop')] bg-center bg-cover" />
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </Link>
 
                 {/* Community Section */}
                 <section className="space-y-4 pt-2">

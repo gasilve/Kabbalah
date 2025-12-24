@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { CircleProgress } from '@/components/ui/CircleProgress';
@@ -20,10 +22,42 @@ import {
   Shield,
   BookMarked,
   Languages,
-  ArrowRightCircle
+  ArrowRightCircle,
+  LogIn
 } from 'lucide-react';
 
 export default function HomePage() {
+  const { data: session } = useSession();
+  const [featuredMeditation, setFeaturedMeditation] = useState<any>(null);
+  const [stats, setStats] = useState<any>(null);
+
+  useEffect(() => {
+    // Fetch stats and a random meditation
+    const fetchContent = async () => {
+      try {
+        const [statsRes, meditationsRes] = await Promise.all([
+          fetch('/api/content'),
+          fetch('/api/content?type=meditaciones')
+        ]);
+
+        const statsData = await statsRes.json();
+        const meditationsData = await meditationsRes.json();
+
+        setStats(statsData.stats);
+
+        if (meditationsData && meditationsData.length > 0) {
+          // Select a random meditation as "Daily Practice"
+          const random = meditationsData[Math.floor(Math.random() * meditationsData.length)];
+          setFeaturedMeditation(random);
+        }
+      } catch (error) {
+        console.error('Error loading content:', error);
+      }
+    };
+
+    fetchContent();
+  }, []);
+
   return (
     <div className="pt-14 pb-12 px-6">
       {/* Header */}
@@ -33,9 +67,16 @@ export default function HomePage() {
             <Sparkles className="w-6 h-6 text-primary" />
             KABBALAH
           </h1>
-          <p className="text-[0.65rem] font-light tracking-[0.2em] text-primary/80 uppercase ml-1">Path of Enlightenment</p>
+          <p className="text-[0.65rem] font-light tracking-[0.2em] text-primary/80 uppercase ml-1">
+            {session?.user ? `Bienvenido, ${session.user.name}` : 'Path of Enlightenment'}
+          </p>
         </div>
         <div className="flex items-center gap-3">
+          {!session && (
+            <Link href="/login" className="flex items-center gap-2 text-xs font-bold text-primary hover:text-white transition-colors">
+              <LogIn className="w-4 h-4" /> Entrar
+            </Link>
+          )}
           <Link href="/explorar" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm hover:bg-white/10 transition-colors group">
             <Search className="w-5 h-5 text-slate-300 group-hover:text-primary transition-colors" />
           </Link>
@@ -62,14 +103,18 @@ export default function HomePage() {
           <Card glass className="p-5 shadow-glow-card relative overflow-hidden transition-all duration-300 group-hover:border-primary/30 group-hover:bg-card-glass/80">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-700" />
             <div className="relative z-10 flex items-center gap-5">
-              <CircleProgress progress={60} level={3} />
+              <CircleProgress progress={session ? 15 : 60} level={session ? 1 : 3} />
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[0.65rem] font-bold text-primary uppercase tracking-widest">Nivel Actual</span>
-                  <span className="text-[0.65rem] font-bold text-slate-400">60%</span>
+                  <span className="text-[0.65rem] font-bold text-slate-400">{session ? '15%' : '60%'}</span>
                 </div>
-                <h3 className="text-lg font-display font-bold text-white mb-1 group-hover:text-glow transition-all">Sefirá de Hod</h3>
-                <p className="text-xs text-slate-400 line-clamp-1">Cultivando la humildad y la entrega divina.</p>
+                <h3 className="text-lg font-display font-bold text-white mb-1 group-hover:text-glow transition-all">
+                  {session ? 'Sefirá de Maljut' : 'Sefirá de Hod'}
+                </h3>
+                <p className="text-xs text-slate-400 line-clamp-1">
+                  {session ? 'Iniciando el ascenso espiritual.' : 'Cultivando la humildad y la entrega divina.'}
+                </p>
               </div>
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
                 <ArrowRight className="w-4 h-4" />
@@ -106,17 +151,23 @@ export default function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="text-2xl font-display font-bold text-white mb-1 drop-shadow-lg">Luz del Zohar</h3>
-                <p className="text-xs text-slate-200/90 font-light mb-4 line-clamp-2 max-w-[90%] drop-shadow-md">Conecta con la energía espiritual de protección escaneando las letras antiguas.</p>
-                <Button className="bg-gradient-to-r from-accent-blue to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white rounded-xl py-2 shadow-[0_0_15px_rgba(59,130,246,0.3)] w-fit h-auto px-5 text-xs">
-                  <Play className="w-4 h-4 mr-2" /> Comenzar Sesión
-                </Button>
+                <h3 className="text-2xl font-display font-bold text-white mb-1 drop-shadow-lg">
+                  {featuredMeditation?.titulo || 'Luz del Zohar'}
+                </h3>
+                <p className="text-xs text-slate-200/90 font-light mb-4 line-clamp-2 max-w-[90%] drop-shadow-md">
+                  {featuredMeditation?.beneficios || 'Conecta con la energía espiritual de protección escaneando las letras antiguas.'}
+                </p>
+                <Link href={featuredMeditation ? `/meditacion/${featuredMeditation._id}` : '/meditacion'}>
+                  <Button className="bg-gradient-to-r from-accent-blue to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white rounded-xl py-2 shadow-[0_0_15px_rgba(59,130,246,0.3)] w-fit h-auto px-5 text-xs">
+                    <Play className="w-4 h-4 mr-2" /> Comenzar Sesión
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
           <div className="bg-black/30 backdrop-blur-md border-t border-white/5 p-4">
             <h4 className="text-[0.6rem] font-bold text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-              <Bell className="w-3 h-3" /> Próximas Conexiones
+              <Bell className="w-3 h-3" /> Estado de la Biblioteca
             </h4>
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-2.5 flex items-center gap-3 transition-colors cursor-pointer group/item">
@@ -124,8 +175,8 @@ export default function HomePage() {
                   <Sparkles className="w-4 h-4 text-slate-400 group-hover/item:text-accent-purple" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[0.65rem] text-accent-purple font-bold">8:00 PM</span>
-                  <span className="text-[0.7rem] font-bold text-slate-300">Tefilá Arvit</span>
+                  <span className="text-[0.65rem] text-accent-purple font-bold">{stats?.meditaciones || 0}</span>
+                  <span className="text-[0.7rem] font-bold text-slate-300">Meditaciones</span>
                 </div>
               </div>
               <div className="bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-2.5 flex items-center gap-3 transition-colors cursor-pointer group/item">
@@ -133,8 +184,8 @@ export default function HomePage() {
                   <BookOpen className="w-4 h-4 text-slate-400 group-hover/item:text-accent-gold" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[0.65rem] text-accent-gold font-bold">10:00 PM</span>
-                  <span className="text-[0.7rem] font-bold text-slate-300">Estudio Nocturno</span>
+                  <span className="text-[0.65rem] text-accent-gold font-bold">{stats?.preguntas || 0}</span>
+                  <span className="text-[0.7rem] font-bold text-slate-300">Preguntas</span>
                 </div>
               </div>
             </div>
