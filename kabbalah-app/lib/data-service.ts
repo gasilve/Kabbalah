@@ -190,13 +190,13 @@ class DataService {
         const q = query.toLowerCase();
 
         return {
-            meditaciones: data.meditaciones.filter(m =>
-                m.titulo.toLowerCase().includes(q) || m.proposito.some(p => p.includes(q))
+            meditaciones: data.meditaciones.filter((m: Meditacion) =>
+                m.titulo.toLowerCase().includes(q) || m.proposito.some((p: string) => p.includes(q))
             ),
-            conceptos: data.conceptos.filter(c =>
+            conceptos: data.conceptos.filter((c: Concepto) =>
                 c.termino.toLowerCase().includes(q) || c.definicion.toLowerCase().includes(q)
             ),
-            revelaciones: data.revelaciones.filter(r =>
+            revelaciones: data.revelaciones.filter((r: Revelacion) =>
                 r.titulo.toLowerCase().includes(q) || r.revelation.toLowerCase().includes(q)
             )
         };
