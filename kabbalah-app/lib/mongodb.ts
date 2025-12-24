@@ -7,7 +7,13 @@ let client: MongoClient | null = null;
 let clientPromise: Promise<MongoClient> | null = null;
 
 function getClientPromise(): Promise<MongoClient> {
+    // During build phase without MONGODB_URI, return a never-resolving promise
+    // This prevents build errors while still allowing runtime to work
     if (!uri) {
+        if (process.env.NODE_ENV === 'production') {
+            // Return a pending promise during build
+            return new Promise(() => { });
+        }
         throw new Error('Please add your MongoDB URI to environment variables');
     }
 
