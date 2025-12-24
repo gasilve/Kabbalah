@@ -99,7 +99,7 @@ function ThemeCard({ title, icon, image, color }: { title: string, icon: React.R
                 <div className={`absolute inset-0 ${color} opacity-20 group-hover:opacity-10 transition-opacity z-10`} />
                 <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-60" />
                 <div className="absolute inset-0 flex items-center justify-center z-20 text-white drop-shadow-lg">
-                    {React.cloneElement(icon as React.ReactElement, { className: "w-8 h-8" })}
+                    {React.cloneElement(icon as React.ReactElement<any>, { className: "w-8 h-8" })}
                 </div>
             </div>
             <p className="text-xs font-bold text-center text-slate-400 group-hover:text-primary transition-colors tracking-wide uppercase">{title}</p>
