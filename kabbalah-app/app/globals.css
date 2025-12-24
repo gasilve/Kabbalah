@@ -26,6 +26,14 @@
     text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
   }
 
+  .shadow-glow-gold {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
+  }
+
+  .shadow-glow-card {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
