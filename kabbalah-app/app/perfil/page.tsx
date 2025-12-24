@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const sefirotAchievements = [
     { id: 'keter', name: 'Keter', icon: 'brightness_7', completed: true, position: 'top' },
