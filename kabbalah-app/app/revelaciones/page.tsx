@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, BookOpen, Eye, Filter, Sparkles } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
