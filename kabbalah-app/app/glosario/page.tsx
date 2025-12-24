@@ -17,13 +17,15 @@ export default function GlossaryPage() {
 
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-    // Group by first letter
-    const groupedTerms = filteredTerms.reduce((acc: any, item) => {
-        const firstLetter = item.termino[0].toUpperCase();
-        if (!acc[firstLetter]) acc[firstLetter] = [];
-        acc[firstLetter].push(item);
-        return acc;
-    }, {});
+    // Group by first letter (filter out items with empty termino)
+    const groupedTerms = filteredTerms
+        .filter(item => item.termino && item.termino.length > 0)
+        .reduce((acc: any, item) => {
+            const firstLetter = item.termino[0].toUpperCase();
+            if (!acc[firstLetter]) acc[firstLetter] = [];
+            acc[firstLetter].push(item);
+            return acc;
+        }, {});
 
     const sortedLetters = Object.keys(groupedTerms).sort();
 
