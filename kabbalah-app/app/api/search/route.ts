@@ -16,27 +16,27 @@ export async function GET(request: Request) {
         const [meditaciones, preguntas, simbolos, revelaciones, clases] = await Promise.all([
             db.collection('meditaciones').find(
                 { $text: { $search: query } },
-                { score: { $meta: 'textScore' } }
+                { projection: { score: { $meta: 'textScore' } } }
             ).sort({ score: { $meta: 'textScore' } }).limit(5).toArray(),
 
             db.collection('preguntas').find(
                 { $text: { $search: query } },
-                { score: { $meta: 'textScore' } }
+                { projection: { score: { $meta: 'textScore' } } }
             ).sort({ score: { $meta: 'textScore' } }).limit(5).toArray(),
 
             db.collection('glosario').find(
                 { $text: { $search: query } },
-                { score: { $meta: 'textScore' } }
+                { projection: { score: { $meta: 'textScore' } } }
             ).sort({ score: { $meta: 'textScore' } }).limit(5).toArray(),
 
             db.collection('revelaciones').find(
                 { $text: { $search: query } },
-                { score: { $meta: 'textScore' } }
+                { projection: { score: { $meta: 'textScore' } } }
             ).sort({ score: { $meta: 'textScore' } }).limit(5).toArray(),
 
             db.collection('clases').find(
                 { $text: { $search: query } },
-                { score: { $meta: 'textScore' } }
+                { projection: { score: { $meta: 'textScore' } } }
             ).sort({ score: { $meta: 'textScore' } }).limit(5).toArray(),
         ]);
 
