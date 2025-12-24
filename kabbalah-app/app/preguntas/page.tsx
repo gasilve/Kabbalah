@@ -205,7 +205,7 @@ export default function PreguntasPage() {
                                 <div>
                                     <div className="text-sm text-white/50 mb-2">Palabras clave</div>
                                     <div className="flex flex-wrap gap-2">
-                                        {selectedQA.keywords.map(keyword => (
+                                        {selectedQA.keywords.map((keyword: string) => (
                                             <span
                                                 key={keyword}
                                                 className="px-3 py-1 rounded-full bg-white/10 text-white/70 text-sm"
