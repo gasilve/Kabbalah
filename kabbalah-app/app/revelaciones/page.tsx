@@ -165,7 +165,7 @@ export default function RevelacionesPage() {
                                     </p>
 
                                     <div className="flex flex-wrap gap-2 mb-3">
-                                        {revelation.themes.slice(0, 3).map(theme => (
+                                        {revelation.themes.slice(0, 3).map((theme: string) => (
                                             <span
                                                 key={theme}
                                                 className="text-xs px-2 py-1 rounded-full bg-accent-gold/10 text-accent-gold"
@@ -244,7 +244,7 @@ export default function RevelacionesPage() {
                                 <div>
                                     <div className="text-sm text-white/50 mb-2">Temas</div>
                                     <div className="flex flex-wrap gap-2">
-                                        {selectedRevelation.themes.map(theme => (
+                                        {selectedRevelation.themes.map((theme: string) => (
                                             <span
                                                 key={theme}
                                                 className="px-3 py-1 rounded-full bg-accent-gold/10 text-accent-gold text-sm"
