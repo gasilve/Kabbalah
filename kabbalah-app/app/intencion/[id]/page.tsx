@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { intenciones, meditacion } from "../../data/content";
 
-export default function IntencionPage({ params }: { params: { id: string } }) {
-    const intencion = intenciones.find((i) => i.id === params.id);
+export default async function IntencionPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const intencion = intenciones.find((i) => i.id === id);
 
     if (!intencion) {
         return (
@@ -108,7 +109,7 @@ export default function IntencionPage({ params }: { params: { id: string } }) {
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {intenciones
-                            .filter((i) => i.id !== params.id)
+                            .filter((i) => i.id !== id)
                             .map((otraIntencion) => (
                                 <Link
                                     key={otraIntencion.id}

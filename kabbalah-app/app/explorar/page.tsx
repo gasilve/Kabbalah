@@ -18,6 +18,38 @@ import { Card } from '@/components/ui/Card';
 import playlists from '@/data/playlists.json';
 
 export default function ExplorarPage() {
+    const [clases, setClases] = React.useState<any[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    const [page, setPage] = React.useState(1);
+    const [hasMore, setHasMore] = React.useState(true);
+
+    const fetchClases = async (pageToLoad: number) => {
+        try {
+            setLoading(true);
+            const res = await fetch(`/api/content?type=clases&page=${pageToLoad}&limit=12`);
+            const responseData = await res.json();
+
+            if (responseData.data) {
+                setClases(prev => pageToLoad === 1 ? responseData.data : [...prev, ...responseData.data]);
+                setHasMore(responseData.current_page < responseData.total_pages);
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching classes:', error);
+            setLoading(false);
+        }
+    };
+
+    React.useEffect(() => {
+        fetchClases(1);
+    }, []);
+
+    const handleLoadMore = () => {
+        const nextPage = page + 1;
+        setPage(nextPage);
+        fetchClases(nextPage);
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             {/* Header */}
@@ -32,37 +64,47 @@ export default function ExplorarPage() {
                 {/* Continue Reading / Featured */}
                 <section className="px-6 py-6">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-display font-bold text-white">Seguir Aprendiendo</h2>
+                        <h2 className="text-lg font-display font-bold text-white">Última Clase</h2>
                     </div>
-                    <Card glass className="p-0 overflow-hidden relative group border-primary/20 bg-gradient-to-br from-indigo-900/20 to-transparent">
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?w=800&q=80')] bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-1000" />
-                        <div className="relative z-10 p-5 flex flex-col gap-4">
-                            <div className="flex justify-between items-start">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.6rem] font-bold bg-primary/20 text-primary border border-primary/20 uppercase tracking-wider">
-                                    Secretos del Zohar
-                                </span>
-                                <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-display font-bold text-white mb-1">La Naturaleza de la Luz</h3>
-                                <p className="text-xs text-slate-400 line-clamp-2 mb-4">Entendiendo la luz infinita (Ein Sof) y el proceso de contracción (Tzimtzum).</p>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black shadow-gold group-hover:scale-110 transition-transform">
-                                        <Play className="w-5 h-5 fill-current" />
+                    {clases.length > 0 ? (
+                        <Link href={`/clase/${clases[0].video_id}`}>
+                            <Card glass className="p-0 overflow-hidden relative group border-primary/20 bg-gradient-to-br from-indigo-900/20 to-transparent">
+                                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?w=800&q=80')] bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-1000" />
+                                <div className="relative z-10 p-5 flex flex-col gap-4">
+                                    <div className="flex justify-between items-start">
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[0.6rem] font-bold bg-primary/20 text-primary border border-primary/20 uppercase tracking-wider">
+                                            {clases[0].playlist}
+                                        </span>
+                                        <Sparkles className="w-4 h-4 text-primary animate-pulse" />
                                     </div>
-                                    <div className="flex-1">
-                                        <div className="flex justify-between text-[0.6rem] text-slate-500 mb-1 font-bold uppercase tracking-widest">
-                                            <span>Progreso</span>
-                                            <span>12 min restantes</span>
-                                        </div>
-                                        <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                            <div className="h-full bg-primary w-[35%] rounded-full shadow-gold" />
+                                    <div>
+                                        <h3 className="text-xl font-display font-bold text-white mb-1">{clases[0].title}</h3>
+                                        <p className="text-xs text-slate-400 line-clamp-2 mb-4">{clases[0].summary}</p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black shadow-gold group-hover:scale-110 transition-transform">
+                                                <Play className="w-5 h-5 fill-current" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex justify-between text-[0.6rem] text-slate-500 mb-1 font-bold uppercase tracking-widest">
+                                                    <span>Inicia ahora</span>
+                                                    <span>Sistema de 5 Pasos</span>
+                                                </div>
+                                                <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-primary w-[5%] rounded-full shadow-gold" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </Card>
+                        </Link>
+                    ) : (
+                        <div className="animate-pulse flex space-x-4">
+                            <div className="flex-1 space-y-4 py-1">
+                                <div className="h-40 bg-slate-700/50 rounded-2xl"></div>
                             </div>
                         </div>
-                    </Card>
+                    )}
                 </section>
 
                 {/* Themes Grid */}
@@ -80,12 +122,30 @@ export default function ExplorarPage() {
 
                 {/* Series List */}
                 <section className="px-6 mt-4">
-                    <h2 className="text-lg font-display font-bold text-white mb-4">Series y Cursos</h2>
+                    <h2 className="text-lg font-display font-bold text-white mb-4">Bibliotecas</h2>
                     <div className="space-y-4">
-                        {playlists.map((playlist) => (
-                            <PlaylistCard key={playlist.id} playlist={playlist} />
+                        {clases.map((c) => (
+                            <Link key={c.video_id} href={`/clase/${c.video_id}`}>
+                                <PlaylistCard playlist={{
+                                    titulo: c.title,
+                                    descripcion: c.summary,
+                                    image: "https://images.unsplash.com/photo-1519750157634-b6d493a0f77c?w=400&q=80",
+                                    video_count: 1
+                                }} />
+                            </Link>
                         ))}
                     </div>
+                    {hasMore && (
+                        <div className="mt-8 flex justify-center">
+                            <button
+                                onClick={handleLoadMore}
+                                disabled={loading}
+                                className="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-300 uppercase tracking-widest hover:bg-white/10 transition-colors disabled:opacity-50"
+                            >
+                                {loading ? 'Cargando...' : 'Cargar más'}
+                            </button>
+                        </div>
+                    )}
                 </section>
             </main>
         </div>

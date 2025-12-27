@@ -16,20 +16,19 @@ export async function GET(request: Request) {
 
         const db = await getDatabase();
 
-        // Búsqueda global
         if (query) {
-            const [meditaciones, preguntas, simbolos, revelaciones] = await Promise.all([
+            const [meditaciones, preguntas, conceptos, clases] = await Promise.all([
                 db.collection('meditaciones').find({ $text: { $search: query } }).limit(10).toArray(),
                 db.collection('preguntas').find({ $text: { $search: query } }).limit(10).toArray(),
-                db.collection('glosario').find({ $text: { $search: query } }).limit(10).toArray(),
-                db.collection('revelaciones').find({ $text: { $search: query } }).limit(10).toArray(),
+                db.collection('conceptos').find({ $text: { $search: query } }).limit(10).toArray(),
+                db.collection('clases').find({ $text: { $search: query } }).limit(10).toArray(),
             ]);
 
             return NextResponse.json({
                 meditaciones,
                 preguntas,
-                simbolos,
-                revelaciones
+                conceptos,
+                clases
             });
         }
 
@@ -45,45 +44,62 @@ export async function GET(request: Request) {
 
             switch (type) {
                 case 'meditaciones':
-                    const meditaciones = await db.collection('meditaciones').find(filter).toArray();
+                    const pageMed = parseInt(searchParams.get('page') || '1');
+                    const limitMed = parseInt(searchParams.get('limit') || '20');
+                    const skipMed = (pageMed - 1) * limitMed;
+                    const meditaciones = await db.collection('meditaciones').find(filter).skip(skipMed).limit(limitMed).toArray();
                     return NextResponse.json(meditaciones);
 
                 case 'glosario':
-                    if (simbolo) filter.simbolo = new RegExp(simbolo, 'i');
-                    const simbolos = await db.collection('glosario').find(filter).toArray();
-                    return NextResponse.json(simbolos);
+                case 'conceptos':
+                    if (simbolo) filter.term = new RegExp(simbolo, 'i');
+                    const conceptosData = await db.collection('conceptos').find(filter).limit(100).toArray();
+                    return NextResponse.json(conceptosData);
 
-                case 'revelaciones':
-                    if (nivel) filter.nivel_profundidad = nivel;
-                    const revelaciones = await db.collection('revelaciones').find(filter).toArray();
-                    return NextResponse.json(revelaciones);
+                case 'historias':
+                    const historias = await db.collection('clases').find({ "didactica.historias.0": { $exists: true } }).limit(50).toArray();
+                    return NextResponse.json(historias);
 
                 case 'qa':
                 case 'preguntas':
-                    const preguntas = await db.collection('preguntas').find(filter).toArray();
+                    const preguntas = await db.collection('preguntas').find(filter).limit(50).toArray();
                     return NextResponse.json(preguntas);
 
                 case 'clases':
-                    const clases = await db.collection('clases').find(filter).toArray();
-                    return NextResponse.json(clases);
+                    const page = parseInt(searchParams.get('page') || '1');
+                    const limit = parseInt(searchParams.get('limit') || '12');
+                    const skip = (page - 1) * limit;
+
+                    const [clases, total] = await Promise.all([
+                        db.collection('clases').find(filter).skip(skip).limit(limit).toArray(),
+                        db.collection('clases').countDocuments(filter)
+                    ]);
+
+                    return NextResponse.json({
+                        current_page: page,
+                        total_pages: Math.ceil(total / limit),
+                        total_items: total,
+                        data: clases
+                    });
 
                 default:
                     return NextResponse.json({ error: 'Tipo inválido' }, { status: 400 });
             }
         }
 
-        // Sin parámetros, devolver resumen
-        const [totalMeditaciones, totalPreguntas, totalSimbolos] = await Promise.all([
+        const [totalMeditaciones, totalPreguntas, totalConceptos, totalClases] = await Promise.all([
             db.collection('meditaciones').countDocuments(),
             db.collection('preguntas').countDocuments(),
-            db.collection('glosario').countDocuments(),
+            db.collection('conceptos').countDocuments(),
+            db.collection('clases').countDocuments(),
         ]);
 
         return NextResponse.json({
             stats: {
                 meditaciones: totalMeditaciones,
                 preguntas: totalPreguntas,
-                simbolos: totalSimbolos
+                conceptos: totalConceptos,
+                clases: totalClases
             }
         });
     } catch (error) {

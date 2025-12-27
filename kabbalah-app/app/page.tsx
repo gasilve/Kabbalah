@@ -29,21 +29,25 @@ import {
 export default function HomePage() {
   const { data: session } = useSession();
   const [featuredMeditation, setFeaturedMeditation] = useState<any>(null);
+  const [dailyFocus, setDailyFocus] = useState<any>(null);
   const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
     // Fetch stats and a random meditation
     const fetchContent = async () => {
       try {
-        const [statsRes, meditationsRes] = await Promise.all([
+        const [statsRes, meditationsRes, dailyFocusRes] = await Promise.all([
           fetch('/api/content'),
-          fetch('/api/content?type=meditaciones')
+          fetch('/api/content?type=meditaciones'),
+          fetch('/api/daily-focus')
         ]);
 
         const statsData = await statsRes.json();
         const meditationsData = await meditationsRes.json();
+        const dailyFocusData = await dailyFocusRes.json();
 
         setStats(statsData.stats);
+        setDailyFocus(dailyFocusData);
 
         if (meditationsData && meditationsData.length > 0) {
           // Select a random meditation as "Daily Practice"
@@ -93,35 +97,126 @@ export default function HomePage() {
         className="mt-2 mb-8"
       >
         <div className="flex items-center justify-between mb-3 px-1">
-          <h2 className="text-lg font-display font-bold text-slate-100">Mi Camino</h2>
+          <h2 className="text-lg font-display font-bold text-slate-100">Mi Progreso</h2>
           <Link href="/mi-viaje" className="text-xs text-primary hover:text-primary-dark transition-colors flex items-center">
-            Mapa Completo <ArrowRight className="w-3 h-3 ml-1" />
+            Ver Árbol <ArrowRight className="w-3 h-3 ml-1" />
           </Link>
         </div>
 
-        <Link href="/arbol-vida" className="block group relative">
+        <Link href="/mi-viaje" className="block group relative">
           <Card glass className="p-5 shadow-glow-card relative overflow-hidden transition-all duration-300 group-hover:border-primary/30 group-hover:bg-card-glass/80">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-700" />
             <div className="relative z-10 flex items-center gap-5">
-              <CircleProgress progress={session ? 15 : 60} level={session ? 1 : 3} />
+              <CircleProgress progress={session ? 15 : 10} level={session ? 1 : 0} />
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[0.65rem] font-bold text-primary uppercase tracking-widest">Nivel Actual</span>
-                  <span className="text-[0.65rem] font-bold text-slate-400">{session ? '15%' : '60%'}</span>
+                  <span className="text-[0.65rem] font-bold text-primary uppercase tracking-widest">{session ? 'Nivel Actual' : 'Invitado'}</span>
+                  <span className="text-[0.65rem] font-bold text-slate-400">{session ? '15%' : '0%'}</span>
                 </div>
                 <h3 className="text-lg font-display font-bold text-white mb-1 group-hover:text-glow transition-all">
-                  {session ? 'Sefirá de Maljut' : 'Sefirá de Hod'}
+                  {session ? 'Sefirá de Maljut' : 'Inicia tu Ascenso'}
                 </h3>
                 <p className="text-xs text-slate-400 line-clamp-1">
-                  {session ? 'Iniciando el ascenso espiritual.' : 'Cultivando la humildad y la entrega divina.'}
+                  {session ? 'Iniciando el ascenso espiritual.' : 'El camino de 10 esferas te espera.'}
                 </p>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                <ArrowRight className="w-4 h-4" />
               </div>
             </div>
           </Card>
         </Link>
+      </motion.section>
+
+      {/* Daily Focus (Enfoque del Día) */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="mb-8"
+      >
+        <div className="flex items-center justify-between mb-3 px-1">
+          <h2 className="text-lg font-display font-bold text-slate-100">Enfoque del Día</h2>
+          <span className="text-[0.65rem] font-medium text-primary/60 uppercase tracking-widest">{dailyFocus?.type || 'Inspiración'}</span>
+        </div>
+
+        <Card glass className="p-5 border-primary/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-3 opacity-20">
+            <BookOpen className="w-12 h-12 text-primary" />
+          </div>
+          <h3 className="text-base font-display font-bold text-primary mb-2 uppercase tracking-wide">
+            {dailyFocus?.title || 'Bereshit'}
+          </h3>
+          <p className="text-sm text-slate-300 leading-relaxed italic mb-3">
+            "{dailyFocus?.content || 'Al principio creó 6... La realidad es un manual que puedes reescribir.'}"
+          </p>
+          {dailyFocus?.extra && (
+            <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/5">
+              <span className="text-[0.6rem] font-bold text-accent-gold uppercase tracking-tighter bg-accent-gold/10 px-2 py-0.5 rounded">Secreto:</span>
+              <span className="text-[0.65rem] text-slate-400 font-medium">{dailyFocus.extra}</span>
+            </div>
+          )}
+        </Card>
+      </motion.section>
+
+      {/* Mystical Alarms & Calendar (Alarmas Místicas) */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="mb-8"
+      >
+        <div className="flex items-center justify-between mb-3 px-1">
+          <h2 className="text-lg font-display font-bold text-slate-100">Portal del Tiempo</h2>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Card className="p-4 bg-white/5 border-white/5 hover:border-primary/20 transition-all group">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <Bell className="w-4 h-4" />
+              </div>
+              <span className="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">Alarmas</span>
+            </div>
+            <p className="text-[0.65rem] text-slate-300 font-medium">Lavado de Manos</p>
+            <p className="text-[0.55rem] text-primary mt-0.5">Momento propicio: Ya</p>
+          </Card>
+          <Card className="p-4 bg-white/5 border-white/5 hover:border-accent-purple/20 transition-all group">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-accent-purple/10 flex items-center justify-center text-accent-purple">
+                <Compass className="w-4 h-4" />
+              </div>
+              <span className="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">Calendario</span>
+            </div>
+            <p className="text-[0.65rem] text-slate-300 font-medium">Jodesh Tevet</p>
+            <p className="text-[0.55rem] text-accent-purple mt-0.5">Portal de Luz: 2 días</p>
+          </Card>
+        </div>
+      </motion.section>
+
+      {/* Angelic Protection (Protección Angélica) */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mb-8"
+      >
+        <h2 className="text-lg font-display font-bold text-slate-100 mb-4 px-1">Guardia Celestial</h2>
+        <Card className="p-0 overflow-hidden border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.05)] bg-gradient-to-br from-[#0c1428] to-[#050914]">
+          <div className="p-4 flex items-center gap-4">
+            <div className="relative">
+              <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full" />
+              <div className="relative w-14 h-14 rounded-full border-2 border-cyan-400/30 flex items-center justify-center bg-black/40">
+                <Shield className="w-7 h-7 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-sm font-display font-bold text-white uppercase tracking-wider mb-1">Protección de los 4 Ángeles</h3>
+              <p className="text-[0.65rem] text-slate-400 leading-tight">Invocación de Miguel, Gabriel, Rafael y Uriel para tu campo áurico.</p>
+            </div>
+            <Link href="/intencion/proteccion-angelica">
+              <Button size="sm" className="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[0.6rem] font-bold">
+                INVOCAR
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </motion.section>
 
       {/* Daily Practice */}

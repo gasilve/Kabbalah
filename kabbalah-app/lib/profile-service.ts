@@ -57,9 +57,35 @@ export async function getUserProgress(userId: string): Promise<UserProgress | nu
     return db.collection<UserProgress>('progress').findOne({ userId });
 }
 
+// Helper to add experience and check level up
+async function addExperience(userId: string, amount: number) {
+    const db = await getDatabase();
+    const profile = await getUserProfile(userId);
+
+    if (!profile) return; // Should create if not exists, but for MVP assumes profile exists or created on login
+
+    // Create profile if null (fallback)
+    const currentXp = profile?.experience || 0;
+    const newXp = currentXp + amount;
+    const newLevel = Math.floor(newXp / 100) + 1; // Simple linear leveling
+
+    await db.collection('profiles').updateOne(
+        { userId },
+        {
+            $set: {
+                experience: newXp,
+                level: newLevel,
+                updatedAt: new Date()
+            },
+            $setOnInsert: { userId, bio: '', role: 'student', stats: { meditationMinutes: 0, coursesCompleted: 0, totalSessions: 0 } }
+        },
+        { upsert: true }
+    );
+}
+
 export async function markMeditationComplete(userId: string, meditationId: string) {
     const db = await getDatabase();
-    return db.collection('progress').updateOne(
+    await db.collection('progress').updateOne(
         { userId },
         {
             $addToSet: { completedMeditations: meditationId },
@@ -68,11 +94,15 @@ export async function markMeditationComplete(userId: string, meditationId: strin
         },
         { upsert: true }
     );
+    // Add XP
+    await addExperience(userId, 20);
+    // Update stats
+    await db.collection('profiles').updateOne({ userId }, { $inc: { "stats.totalSessions": 1, "stats.meditationMinutes": 15 } });
 }
 
 export async function markCurriculumComplete(userId: string, itemId: string) {
     const db = await getDatabase();
-    return db.collection('progress').updateOne(
+    await db.collection('progress').updateOne(
         { userId },
         {
             $addToSet: { completedCurriculumItems: itemId },
@@ -81,6 +111,10 @@ export async function markCurriculumComplete(userId: string, itemId: string) {
         },
         { upsert: true }
     );
+    // Add XP
+    await addExperience(userId, 50);
+    // Update stats
+    await db.collection('profiles').updateOne({ userId }, { $inc: { "stats.coursesCompleted": 1 } });
 }
 
 export async function toggleFavorite(userId: string, itemId: string) {

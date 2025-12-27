@@ -17,7 +17,10 @@ import {
     LogIn,
     Sparkles,
     Check,
-    Heart
+    Heart,
+    Library,
+    ChevronUp,
+    Shield
 } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
@@ -158,68 +161,45 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="glass-panel border-white/5 p-8 rounded-3xl relative overflow-hidden flex justify-center">
-                        {/* Background SVG Connections */}
-                        <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 300 300">
-                            <line x1="150" y1="50" x2="80" y2="100" stroke="currentColor" strokeWidth="1" />
-                            <line x1="150" y1="50" x2="220" y2="100" stroke="currentColor" strokeWidth="1" />
-                            <line x1="80" y1="100" x2="220" y2="100" stroke="currentColor" strokeWidth="1" />
-                            <line x1="80" y1="100" x2="150" y2="150" stroke="currentColor" strokeWidth="1" />
-                            <line x1="220" y1="100" x2="150" y2="150" stroke="currentColor" strokeWidth="1" />
-                            <line x1="80" y1="100" x2="80" y2="200" stroke="currentColor" strokeWidth="1" />
-                            <line x1="220" y1="100" x2="220" y2="200" stroke="currentColor" strokeWidth="1" />
-                            <line x1="150" y1="150" x2="80" y2="200" stroke="currentColor" strokeWidth="1" />
-                            <line x1="150" y1="150" x2="220" y2="200" stroke="currentColor" strokeWidth="1" />
+                        {/* Background SVG Connections (Full 10 Sefirot) */}
+                        <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 300 400">
+                            {/* Simplified connections for mobile profile view */}
+                            <line x1="150" y1="30" x2="150" y2="350" stroke="currentColor" strokeWidth="1" />
+                            <line x1="100" y1="80" x2="200" y2="80" stroke="currentColor" strokeWidth="1" />
+                            <line x1="100" y1="180" x2="200" y2="180" stroke="currentColor" strokeWidth="1" />
                         </svg>
 
-                        <div className="relative z-10 grid grid-cols-3 gap-y-8 gap-x-4 w-full">
-                            {/* Keter (Top Center) */}
-                            <div className="col-start-2 flex flex-col items-center gap-2">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('keter')}
-                                    icon={<Sparkles className="w-5 h-5" />}
-                                    name="Keter"
-                                    glow
-                                />
+                        <div className="relative z-10 grid grid-cols-3 gap-y-6 gap-x-2 w-full">
+                            {/* Keter */}
+                            <div className="col-start-2 flex justify-center">
+                                <SefiraBadge completed={isSefiraCompleted('keter')} icon={<Sparkles className="w-5 h-5" />} name="Keter" glow />
                             </div>
 
-                            {/* Binah & Chochmah (Level 2) */}
-                            <div className="col-start-1 flex flex-col items-center gap-2 mt-4">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('binah')}
-                                    name="Binah"
-                                />
-                            </div>
-                            <div className="col-start-3 flex flex-col items-center gap-2 mt-4">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('chochmah')}
-                                    icon={<Sparkles className="w-5 h-5" />}
-                                    name="Chochmah"
-                                />
+                            {/* Binah & Chokmah */}
+                            <div className="col-start-1 flex justify-center"><SefiraBadge completed={isSefiraCompleted('binah')} name="Binah" /></div>
+                            <div className="col-start-3 flex justify-center"><SefiraBadge completed={isSefiraCompleted('chokmah')} name="Chokmah" /></div>
+
+                            {/* Gevurah & Chesed */}
+                            <div className="col-start-1 flex justify-center"><SefiraBadge completed={isSefiraCompleted('gevurah')} name="Gevurah" /></div>
+                            <div className="col-start-3 flex justify-center"><SefiraBadge completed={isSefiraCompleted('chesed')} name="Chesed" /></div>
+
+                            {/* Tiferet */}
+                            <div className="col-start-2 flex justify-center -mt-2">
+                                <SefiraBadge completed={isSefiraCompleted('tiferet')} icon={<Heart className="w-6 h-6 fill-white" />} name="Tiferet" large glow />
                             </div>
 
-                            {/* Gevurah & Chesed (Level 3) */}
-                            <div className="col-start-1 flex flex-col items-center gap-2">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('gevurah')}
-                                    name="Gevurah"
-                                />
+                            {/* Hod & Netzach */}
+                            <div className="col-start-1 flex justify-center"><SefiraBadge completed={isSefiraCompleted('hod')} name="Hod" /></div>
+                            <div className="col-start-3 flex justify-center"><SefiraBadge completed={isSefiraCompleted('netzach')} name="Netzach" /></div>
+
+                            {/* Yesod */}
+                            <div className="col-start-2 flex justify-center">
+                                <SefiraBadge completed={isSefiraCompleted('yesod')} name="Yesod" />
                             </div>
-                            {/* Tiferet (Center) */}
-                            <div className="col-start-2 flex flex-col items-center gap-2 -mt-4">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('tiferet')}
-                                    icon={<Heart className="w-7 h-7 fill-white" />}
-                                    name="Tiferet"
-                                    large
-                                    glow
-                                />
-                            </div>
-                            <div className="col-start-3 flex flex-col items-center gap-2">
-                                <SefiraBadge
-                                    completed={isSefiraCompleted('chesed')}
-                                    icon={<Check className="w-5 h-5" />}
-                                    name="Chesed"
-                                />
+
+                            {/* Malchut */}
+                            <div className="col-start-2 flex justify-center">
+                                <SefiraBadge completed={isSefiraCompleted('malchut')} icon={<Library className="w-5 h-5" />} name="Malchut" />
                             </div>
                         </div>
                     </div>
